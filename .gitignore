@@ -1,9 +1,11 @@
 **.cmake
 /CMakeFiles/**
 /src/CMakeFiles/**
-/test//CMakeFiles/**
 Makefile
 CMakeCache.txt
 /test/Makefile
 /test/ExampleProject_test
 /src/Makefile
+ExampleProject
+src/libExampleProject_src.a
+test/CMakeFiles/
