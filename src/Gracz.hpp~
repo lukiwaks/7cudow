@@ -1,0 +1,9 @@
+#include "Gracz.cpp"
+
+class Gracz
+{
+ 	public:
+ 		int BlueCardQuantity;
+ 		int BlueCardPoints;
+ 		void addBlueCard(int pointsCount);
+};

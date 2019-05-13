@@ -1,0 +1,7 @@
+#include "doctest.h"
+
+#include <stdexcept>
+
+TEST_CASE("Example matchers")
+{
+}

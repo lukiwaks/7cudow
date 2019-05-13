@@ -1,0 +1,2 @@
+/usr/bin/ar qc libExampleProject_src.a  CMakeFiles/ExampleProject_src.dir/GoldenCard.cpp.o CMakeFiles/ExampleProject_src.dir/Gracz.cpp.o CMakeFiles/ExampleProject_src.dir/wonder.cpp.o
+/usr/bin/ranlib libExampleProject_src.a

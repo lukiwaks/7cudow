@@ -1,0 +1,23 @@
+#include "doctest.h"
+#include "Gracz.hpp"
+
+
+#include <stdexcept>
+/*
+TEST_CASE("Is the test returning FALSE?")
+{ 
+	CHECK(0);
+}
+*/
+
+TEST_CASE("testing addBlueCard(int pointsCount) used by class Gracz") 
+{
+	Gracz Player;
+	int StartValueQuantity=Player.BlueCardQuantity;
+	//Player.addBlueCard(0);
+  	SUBCASE("pointsCount == 0 => Player.BlueCardQuantity increase bv 1")
+	{
+        	CHECK(Player.BlueCardQuantity == (StartValueQuantity+1));
+  	 }
+}
+

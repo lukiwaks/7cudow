@@ -1,0 +1,9 @@
+#include "Gracz.hpp"
+
+
+
+ void Gracz::addBlueCard(int pointsCount)
+ {
+ 	BlueCardQuantity++;
+ }
+ 
