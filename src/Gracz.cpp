@@ -1,5 +1,6 @@
 #include "Gracz.hpp"
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int Gracz::returnBlueCardQuantity()
@@ -41,6 +42,11 @@ symbol Gracz::returnGreen(int numer)
 	return green[numer];
 }
 
+/*int Gracz::getPointsResult()
+{
+
+}*/
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gracz::addBlueCard(int pointsCount)
@@ -65,6 +71,54 @@ void Gracz::addGreenCard(symbol Symbol)
 {
 	green[GreenCardQuantity]=Symbol;
 	GreenCardQuantity++;
+}
+int Gracz::returnGreenCardPoints()
+{
+	int UP=Wonder->returnWonderUniversalSymbol();
+	if ((GreenCardQuantity+UP)==0)
+	{
+		return 0;
+	}
+	else
+	{
+		int sumTablica=0;
+		int sumKolo=0;
+		int sumCyrkiel=0;
+		for (int i=0; i<GreenCardQuantity; i++)
+		{
+			if (green[i]==symbol::kolo)
+			{
+				sumKolo++;
+			}
+			else if (green[i]==symbol::tablica)
+			{
+				sumTablica++;
+			}	
+			else if (green[i]==symbol::cyrkiel)
+			{
+				sumCyrkiel++;
+			}	
+		}
+		if (sumTablica>=sumKolo&&sumTablica>=sumCyrkiel)
+		{
+			sumTablica=sumTablica+UP;
+		}
+		else if (sumKolo>=sumTablica&&sumKolo>=sumCyrkiel)
+		{
+			sumKolo=sumKolo+UP;
+		}
+		else 
+		{
+			sumCyrkiel=sumCyrkiel+UP;
+		}
+		int wynik = sumTablica*sumTablica+sumKolo*sumKolo+sumCyrkiel*sumCyrkiel;
+		return wynik;
+	}
+}
+
+void Gracz::getWonder(wonder * W)
+{
+	Wonder=W;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

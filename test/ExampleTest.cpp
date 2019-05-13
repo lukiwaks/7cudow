@@ -1,7 +1,9 @@
 #include "doctest.h"
 #include "Gracz.hpp"
 #include "GoldenCard.hpp"
-#include "wonder.hpp"
+
+
+#include <iostream>
 
 
 #include <stdexcept>
@@ -157,7 +159,7 @@ TEST_CASE("testing addGreenCard(symbol Symbol) used by class Gracz")
 		symbol test = symbol::tablica;
 		int StartValueQuantity=Player.returnGreenCardQuantity();
 		Player.addGreenCard(test);
-        CHECK(Player.returnGreenCardQuantity() == (StartValueQuantity+1));
+        CHECK(Player.returnGreenCardQuantity() == 1);
         CHECK(Player.returnGreen(0) == symbol::tablica);
   	}
   	SUBCASE("addGreenCard(tablica) and GreenCardQuantity == 1 => Player.RedCardQuantity increase bv 0 and green[1]=tablica")
@@ -167,7 +169,7 @@ TEST_CASE("testing addGreenCard(symbol Symbol) used by class Gracz")
 		symbol test = symbol::tablica;
 		int StartValueQuantity=Player.returnGreenCardQuantity();
 		Player.addGreenCard(test);
-        CHECK(Player.returnGreenCardQuantity() == (StartValueQuantity+1));
+        CHECK(Player.returnGreenCardQuantity() == 2);
         CHECK(Player.returnGreen(1) == symbol::tablica);
   	}
   	SUBCASE("addGreenCard(kolo) and GreenCardQuantity == 1 => Player.RedCardQuantity increase bv 0 and green[1]=kolo")
@@ -177,7 +179,7 @@ TEST_CASE("testing addGreenCard(symbol Symbol) used by class Gracz")
 		symbol test = symbol::kolo;
 		int StartValueQuantity=Player.returnGreenCardQuantity();
 		Player.addGreenCard(test);
-        CHECK(Player.returnGreenCardQuantity() == (StartValueQuantity+1));
+        CHECK(Player.returnGreenCardQuantity() == 2);
         CHECK(Player.returnGreen(1) == symbol::kolo);
   	}
   	SUBCASE("addGreenCard(kolo) and GreenCardQuantity == 5 => Player.RedCardQuantity increase bv 0 and green[1]=kolo")
@@ -191,7 +193,7 @@ TEST_CASE("testing addGreenCard(symbol Symbol) used by class Gracz")
 		symbol test = symbol::kolo;
 		int StartValueQuantity=Player.returnGreenCardQuantity();
 		Player.addGreenCard(test);
-        CHECK(Player.returnGreenCardQuantity() == (StartValueQuantity+1));
+        CHECK(Player.returnGreenCardQuantity() == 6);
         CHECK(Player.returnGreen(5) == symbol::kolo);
   	}
  }
@@ -902,3 +904,193 @@ TEST_CASE("testing void addWonderLevel () used by class wonder")
 		}
 	}
 }
+TEST_CASE("testing int Gracz::returnGreenCardPoints().")
+{
+	SUBCASE ("if GreenCardQuantity==1 return 0 and there isn't wonder UniversalSymbol")
+	{
+		Gracz Player;
+		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&Wonder);
+		int test=Player.returnGreenCardPoints();
+		CHECK (0==test);
+	}
+	SUBCASE ("if GreenCardQuantity==1 return 1 and there isn't wonder UniversalSymbol. Check for kolo symbol.")
+	{
+		Gracz Player;
+		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&Wonder);
+		Player.addGreenCard(symbol::kolo);
+		int test=Player.returnGreenCardPoints();
+		CHECK (1==test);
+	}
+	SUBCASE ("if GreenCardQuantity==1 return 1 and there isn't wonder UniversalSymbol. Check for tablica symbol.")
+	{
+		Gracz Player;
+		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&Wonder);
+		Player.addGreenCard(symbol::tablica);
+		int test=Player.returnGreenCardPoints();
+		CHECK (1==test);
+	}
+	SUBCASE ("if GreenCardQuantity==2 and there isn't wonder UniversalSymbol")
+	{
+		SUBCASE ("if symbol green [0]==symbol green [1] return 4")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::tablica);
+			Player.addGreenCard(symbol::tablica);
+			int test=Player.returnGreenCardPoints();
+			CHECK (4==test);
+		}
+		SUBCASE ("if symbol green [0]==symbol green [1] return 4")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::kolo);
+			int test=Player.returnGreenCardPoints();
+			CHECK (4==test);
+		}
+		SUBCASE ("if symbol green [0]!=symbol green [1] return 2")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			int test=Player.returnGreenCardPoints();
+			CHECK (2==test);
+		}
+		SUBCASE ("if symbol green [0]!=symbol green [1] return 2")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::tablica);
+			Player.addGreenCard(symbol::cyrkiel);
+			int test=Player.returnGreenCardPoints();
+			CHECK (2==test);
+		}
+	}
+	SUBCASE ("if GreenCardQuantity==3 and there isn't wonder UniversalSymbol")
+	{
+		SUBCASE ("if symbol green [0]==symbol green [1]==symbol green [2] return 9")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::tablica);
+			Player.addGreenCard(symbol::tablica);
+			Player.addGreenCard(symbol::tablica);
+			int test=Player.returnGreenCardPoints();
+			CHECK (9==test);
+		}
+		SUBCASE ("if symbol green [0]==symbol green [1]!= symbol green [2]return 5")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			int test=Player.returnGreenCardPoints();
+			CHECK (5==test);
+		}
+		SUBCASE ("if symbol green [0]!=symbol green [1]!=symbol green [2] return 3")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			Player.addGreenCard(symbol::tablica);
+			int test=Player.returnGreenCardPoints();
+			CHECK (3==test);
+		}
+
+	}
+	SUBCASE ("if GreenCardQuantity==6 and there isn't wonder UniversalSymbol, green[0]==kolo, green[1]==tablica, green[2]==kolo, green[3]==cyrkiel, green[4]==kolo, green[5]==cyrkiel return 14")
+	{
+		Gracz Player;
+		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&Wonder);
+		Player.addGreenCard(symbol::kolo);
+		Player.addGreenCard(symbol::tablica);
+		Player.addGreenCard(symbol::kolo);
+		Player.addGreenCard(symbol::cyrkiel);
+		Player.addGreenCard(symbol::kolo);
+		Player.addGreenCard(symbol::cyrkiel);
+		int test=Player.returnGreenCardPoints();
+		CHECK (14==test);
+	}
+	SUBCASE ("When woderUniversalSymbol!=0")
+	{
+		SUBCASE ("if symbol green [0]==symbol green [1]!= symbol green [2], and woderUniversalSymbol==1 return 10")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Wonder.addWonderLevel();
+			Wonder.addWonderLevel();
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			int test=Player.returnGreenCardPoints();
+			CHECK (10==test);
+		}
+		SUBCASE ("if GreenCardQuantity==6 and there isn't wonder UniversalSymbol, green[0]==kolo, green[1]==tablica, green[2]==kolo, green[3]==cyrkiel, green[4]==kolo, green[5]==cyrkiel and woderUniversalSymbol==1 return 21")
+		{
+			Gracz Player;
+			wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
+			Player.getWonder (&Wonder);
+			Wonder.addWonderLevel();
+			Wonder.addWonderLevel();
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::tablica);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			Player.addGreenCard(symbol::kolo);
+			Player.addGreenCard(symbol::cyrkiel);
+			int test=Player.returnGreenCardPoints();
+			CHECK (21==test);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+TEST_CASE("testing int Gracz::getPointsResult(). This function should return sum of BlueCardPoints, wonderWinPoints, RedCardPoints, GreenCardPoints, GoldenCardPoints, GuildPoints")
+{
+	SUBCASE ("if a level is not 0/1/2/3 return 1, error information")
+		{
+
+		}
+
+}*/
+

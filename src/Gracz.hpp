@@ -1,4 +1,5 @@
 #include "symbol.h"
+#include "wonder.hpp"
 
 class Gracz
 {
@@ -13,6 +14,8 @@ class Gracz
  		int RedCardWarPoints;
  		symbol green [20];
 
+ 		wonder *Wonder;
+
 
  	public:
  		int returnBlueCardQuantity();
@@ -24,13 +27,16 @@ class Gracz
 
 		int returnBlueCardPoints();
 		int returnRedCardWarPoints();
+		int returnGreenCardPoints();
 
  		void addBlueCard(int pointsCount);
  		void addBrownCard();
  		void addGreyCard();
  		void addRedCard(int noOfWarSymbols);
  		void addGreenCard(symbol Symbol);
+ 		void getWonder(wonder * W);
 
+ 		//int getPointsResult();
  		Gracz ();
  		
 };
