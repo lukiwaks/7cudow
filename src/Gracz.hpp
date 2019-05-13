@@ -32,8 +32,6 @@ class Gracz
  		void addGreenCard(symbol Symbol);
 
  		Gracz ();
-
- 		int getPointsResult()
  		
 };
 

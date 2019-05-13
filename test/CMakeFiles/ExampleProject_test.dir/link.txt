@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/ExampleProject_test.dir/ExampleTest.cpp.o CMakeFiles/ExampleProject_test.dir/MainForTests.cpp.o  -o ExampleProject_test ../src/libExampleProject_src.a 
