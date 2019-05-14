@@ -1086,25 +1086,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		}
 	}
 }
+
 /*
-TEST_CASE("")
-{
-	GoldenCard a(GoldenCardType::arena);
-	CHECK(GoldenCardType::arena==(&a)->returnType());
-	GoldenCard * b [10];
-	GoldenCard c(GoldenCardType::arena);
-	b[0]=&c;
-	CHECK(GoldenCardType::arena==b[0]->returnType());
-
-	Gracz Player;
-	Player.addGoldenCard(GoldenCardType::arena);
-	CHECK (int(GoldenCardType::arena)==(int(Player.returnGold(0)->returnType())));
-
-}*/
-
-
-
-
 TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 {
 	SUBCASE ("addGoldenCard(GoldenCardType::arena) => gold[0]->type==GoldenCardType::arena, GoldenCardQuantity==1")
@@ -1115,8 +1098,542 @@ TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0)->returnType()));
 	}
 }
+*/
+TEST_CASE ("testing Gracz::war()")
+{
+	SUBCASE ("if there are no neighbors return 1, error")
+	{
+		Gracz Player;
+		CHECK (1==Player.war(1));
+	}
+	SUBCASE ("if there are neighbors and era==1")
+	{
+		SUBCASE ("warPoinst==0 for all players , return 0, and do not change RedCardWinPoints")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (0==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(4);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 0")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (0==Player.returnRedCardWinPoints());
+		}
+	}
+	SUBCASE ("if there are neighbors and era==2")
+	{
+		SUBCASE ("warPoinst==0 for all players , return 0, and do not change RedCardWinPoints")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (0==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(4);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 3")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (3==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 6")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (6==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (2==Player.returnRedCardWinPoints());
+		}
+
+	}
+	SUBCASE ("if there are neighbors and era==3")
+	{
+		SUBCASE ("warPoinst==0 for all players , return 0, and do not change RedCardWinPoints")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (0==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(1);
+			PlayerL.addRedCard(1);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			PlayerR.addRedCard(4);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 5")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (5==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 10")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (10==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 4")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			Player.addRedCard(2);
+			PlayerL.addRedCard(4);
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (4==Player.returnRedCardWinPoints());
+		}
+
+	}
+}
 
 
+TEST_CASE ("testing of Guild::coutGuildPoints")
+{
+	SUBCASE ("testing for GuildType::gildia_robotnikow")
+	{
+		SUBCASE ("if Left.BrownCardQuantity==0 and Right.BrownCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BrownCardQuantity=0;
+			R.BrownCardQuantity=0;
+			Guild G (GuildType::gildia_robotnikow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BrownCardQuantity==1 and Right.BrownCardQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BrownCardQuantity=1;
+			R.BrownCardQuantity=0;
+			Guild G (GuildType::gildia_robotnikow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BrownCardQuantity==1 and Right.BrownCardQuantity==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BrownCardQuantity=1;
+			R.BrownCardQuantity=1;
+			Guild G (GuildType::gildia_robotnikow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BrownCardQuantity==4 and Right.BrownCardQuantity==12 return 16")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BrownCardQuantity=4;
+			R.BrownCardQuantity=12;
+			Guild G (GuildType::gildia_robotnikow);
+			CHECK (16==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_rzemieslnikow")
+	{
+		SUBCASE ("if Left.GreyCardQuantity==0 and Right.GreyCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreyCardQuantity=0;
+			R.GreyCardQuantity=0;
+			Guild G (GuildType::gildia_rzemieslnikow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreyCardQuantity==1 and Right.GreyCardQuantity==0 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreyCardQuantity=1;
+			R.GreyCardQuantity=0;
+			Guild G (GuildType::gildia_rzemieslnikow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreyCardQuantity==1 and Right.GreyCardQuantity==1 return 4")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreyCardQuantity=1;
+			R.GreyCardQuantity=1;
+			Guild G (GuildType::gildia_rzemieslnikow);
+			CHECK (4==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreyCardQuantity==4 and Right.GreyCardQuantity==12 return 32")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreyCardQuantity=4;
+			R.GreyCardQuantity=12;
+			Guild G (GuildType::gildia_rzemieslnikow);
+			CHECK (32==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_kupcow")
+	{
+		SUBCASE ("if Left.GoldenCardQuantity==0 and Right.GoldenCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GoldenCardQuantity=0;
+			R.GoldenCardQuantity=0;
+			Guild G (GuildType::gildia_kupcow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GoldenCardQuantity==1 and Right.GoldenCardQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GoldenCardQuantity=1;
+			R.GoldenCardQuantity=0;
+			Guild G (GuildType::gildia_kupcow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GoldenCardQuantity==1 and Right.GoldenCardQuantity==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GoldenCardQuantity=1;
+			R.GoldenCardQuantity=1;
+			Guild G (GuildType::gildia_kupcow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GoldenCardQuantity==4 and Right.GoldenCardQuantity==12 return 16")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GoldenCardQuantity=4;
+			R.GoldenCardQuantity=12;
+			Guild G (GuildType::gildia_kupcow);
+			CHECK (16==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_filozofow")
+	{
+		SUBCASE ("if Left.GreenCardQuantity==0 and Right.GreenCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreenCardQuantity=0;
+			R.GreenCardQuantity=0;
+			Guild G (GuildType::gildia_filozofow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreenCardQuantity==1 and Right.GreenCardQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreenCardQuantity=1;
+			R.GreenCardQuantity=0;
+			Guild G (GuildType::gildia_filozofow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreenCardQuantity==1 and Right.GreenCardQuantity==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreenCardQuantity=1;
+			R.GreenCardQuantity=1;
+			Guild G (GuildType::gildia_filozofow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.GreenCardQuantity==4 and Right.GreenCardQuantity==12 return 16")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.GreenCardQuantity=4;
+			R.GreenCardQuantity=12;
+			Guild G (GuildType::gildia_filozofow);
+			CHECK (16==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_szpiegow")
+	{
+		SUBCASE ("if Left.RedCardQuantity==0 and Right.RedCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.RedCardQuantity=0;
+			R.RedCardQuantity=0;
+			Guild G (GuildType::gildia_szpiegow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.RedCardQuantity==1 and Right.RedCardQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.RedCardQuantity=1;
+			R.RedCardQuantity=0;
+			Guild G (GuildType::gildia_szpiegow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.RedCardQuantity==1 and Right.RedCardQuantity==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.RedCardQuantity=1;
+			R.RedCardQuantity=1;
+			Guild G (GuildType::gildia_szpiegow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.RedCardQuantity==4 and Right.RedCardQuantity==12 return 16")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.RedCardQuantity=4;
+			R.RedCardQuantity=12;
+			Guild G (GuildType::gildia_szpiegow);
+			CHECK (16==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_sedziow")
+	{
+		SUBCASE ("if Left.BlueCardQuantity==0 and Right.BlueCardQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BlueCardQuantity=0;
+			R.BlueCardQuantity=0;
+			Guild G (GuildType::gildia_sedziow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BlueCardQuantity==1 and Right.BlueCardQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BlueCardQuantity=1;
+			R.BlueCardQuantity=0;
+			Guild G (GuildType::gildia_sedziow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BlueCardQuantity==1 and Right.BlueCardQuantity==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BlueCardQuantity=1;
+			R.BlueCardQuantity=1;
+			Guild G (GuildType::gildia_sedziow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if Left.BlueCardQuantity==4 and Right.BlueCardQuantity==12 return 16")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.BlueCardQuantity=4;
+			R.BlueCardQuantity=12;
+			Guild G (GuildType::gildia_sedziow);
+			CHECK (16==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+
+	//Gildia Amatorow, Budowniczych, Naukowcow, Strategow nie sa ogarniete.
+
+
+}
 
 
 

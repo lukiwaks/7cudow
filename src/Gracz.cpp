@@ -1,5 +1,5 @@
 #include "Gracz.hpp"
-
+#define NULL 0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -139,6 +139,37 @@ GoldenCard * Gracz::returnGold (int i)
 
 	return gold[i];
 }
+int Gracz::war (int era)
+{
+	if (Left==NULL||Right==NULL)
+	{
+		return 1;
+	}
+	int wynik=0;
+	int parameter=1+(era-1)*2;
+	if (RedCardWarPoints<Left->returnRedCardWarPoints())
+	{
+		wynik=wynik-1;
+	}
+	if (RedCardWarPoints<Right->returnRedCardWarPoints())
+	{
+		wynik=wynik-1;
+	}
+	if (RedCardWarPoints>Left->returnRedCardWarPoints())
+	{
+		wynik=wynik+parameter;
+	}
+	if (RedCardWarPoints>Right->returnRedCardWarPoints())
+	{
+		wynik=wynik+parameter;
+	}
+	RedCardWinPoints=wynik;
+	return 0;
+}
+int Gracz::returnRedCardWinPoints()
+{
+	return RedCardWinPoints;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -150,4 +181,8 @@ Gracz::Gracz ()
  	RedCardQuantity=0;
  	GreenCardQuantity=0;
  	GoldenCardQuantity=0;
+ 	RedCardWinPoints=0;
+ 	RedCardWarPoints=0;
+ 	Left=NULL;
+ 	Right=NULL;
 }

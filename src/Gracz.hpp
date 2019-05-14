@@ -1,5 +1,7 @@
 #include "symbol.h"
 #include "GoldenCard.hpp"
+#include "Guild.hpp"
+
 
 
 class Gracz
@@ -14,6 +16,7 @@ class Gracz
 
  		int BlueCardPoints;
  		int RedCardWarPoints;
+ 		int RedCardWinPoints;
  		symbol green [20];
 		GoldenCard *gold[20];
 
@@ -34,6 +37,7 @@ class Gracz
 		int returnBlueCardPoints();
 		int returnRedCardWarPoints();
 		int returnGreenCardPoints();
+		int returnRedCardWinPoints();
 
  		void addBlueCard(int pointsCount);
  		void addBrownCard();
@@ -44,7 +48,7 @@ class Gracz
  		void getWonder(wonder * W);
  		void setNeighbours (Gracz * L, Gracz * R);
  		GoldenCard * returnGold (int i);
- 		//int getPointsResult();
+ 		int war (int era);
  		Gracz ();
  		
 };
