@@ -1,7 +1,5 @@
 #include "doctest.h"
 #include "Gracz.hpp"
-#include "GoldenCard.hpp"
-
 
 #include <iostream>
 
@@ -205,12 +203,12 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 		SUBCASE("if type of card is tawerna it sohuld return 0")
 		{
 			GoldenCard Card (GoldenCardType::tawerna);
-			CHECK (0==Card.countWinPoints(2,2,26));
+			CHECK (0==Card.countWinPoints(2,2,26,NULL));
 		}
 		SUBCASE("if type of card is bazar it should return 0")
 		{
 			GoldenCard Card (GoldenCardType::bazar);
-			CHECK (0==Card.countWinPoints(3,4,6));
+			CHECK (0==Card.countWinPoints(3,4,6,NULL));
 		}
 	}
 	SUBCASE("if type of card is port it should return nuberOfBrownCards")
@@ -218,17 +216,17 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 		SUBCASE("if nuberOfBrownCards is 0 return 0")
 		{
 			GoldenCard Card (GoldenCardType::port);
-			CHECK (0==Card.countWinPoints(0,24,26));
+			CHECK (0==Card.countWinPoints(0,24,26,NULL));
 		}
 		SUBCASE("if nuberOfBrownCards is 1 return 1")
 		{
 			GoldenCard Card (GoldenCardType::port);
-			CHECK (1==Card.countWinPoints(1,2,2));
+			CHECK (1==Card.countWinPoints(1,2,2,NULL));
 		}
 		SUBCASE("if nuberOfBrownCards is 55 return 55")
 		{
 			GoldenCard Card (GoldenCardType::port);
-			CHECK (55==Card.countWinPoints(55,4,6));
+			CHECK (55==Card.countWinPoints(55,4,6,NULL));
 		}
 		
 	}
@@ -237,17 +235,17 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 		SUBCASE("if nuberOfGoldenCards is 0 return 0")
 		{
 			GoldenCard Card (GoldenCardType::latarnia_morska);
-			CHECK (0==Card.countWinPoints(12,0,3));
+			CHECK (0==Card.countWinPoints(12,0,3,NULL));
 		}
 		SUBCASE("if nuberOfGoldenCards is 1 return 1")
 		{
 			GoldenCard Card (GoldenCardType::latarnia_morska);
-			CHECK (1==Card.countWinPoints(13,1,12));
+			CHECK (1==Card.countWinPoints(13,1,12,NULL));
 		}
 		SUBCASE("if nuberOfGoldenCards is 5 return 5")
 		{
 			GoldenCard Card (GoldenCardType::latarnia_morska);
-			CHECK (5==Card.countWinPoints(4,5,26));
+			CHECK (5==Card.countWinPoints(4,5,26,NULL));
 		}
 	}
 	SUBCASE("if type of card is dom_handlowy it should return 2*nuberOfGreyCards")
@@ -255,19 +253,48 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 		SUBCASE("if nuberOfGreyCards is 0 return 0")
 		{
 			GoldenCard Card (GoldenCardType::dom_handlowy);
-			CHECK (0==Card.countWinPoints(2,7,0));
+			CHECK (0==Card.countWinPoints(2,7,0,NULL));
 		}
 		SUBCASE("if nuberOfGreyCards is 1 return 2")
 		{
 			GoldenCard Card (GoldenCardType::dom_handlowy);
-			CHECK (2==Card.countWinPoints(12,7,1));
+			CHECK (2==Card.countWinPoints(12,7,1,NULL));
 		}
 		SUBCASE("if nuberOfGreyCards is 8 return 16")
 		{
 			GoldenCard Card (GoldenCardType::dom_handlowy);
-			CHECK (16==Card.countWinPoints(3,4,8));
+			CHECK (16==Card.countWinPoints(3,4,8,NULL));
 		}
 	}
+	SUBCASE("if type of card is arena it should return woder::level")
+	{
+		{
+			GoldenCard Card (GoldenCardType::arena);
+			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+			CHECK (0==Card.countWinPoints(12,7,1,&W));
+		}
+	}
+	SUBCASE("if type of card is arena it should return woder::level")
+	{
+		{
+			GoldenCard Card (GoldenCardType::arena);
+			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+			W.addWonderLevel();
+			CHECK (1==Card.countWinPoints(12,7,1,&W));
+		}
+	}
+	SUBCASE("if type of card is arena it should return woder::level")
+	{
+		{
+			GoldenCard Card (GoldenCardType::arena);
+			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+			W.addWonderLevel();
+			W.addWonderLevel();
+			W.addWonderLevel();
+			CHECK (3==Card.countWinPoints(12,7,1,&W));
+		}
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1059,38 +1086,49 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-TEST_CASE("testing int Gracz::getPointsResult(). This function should return sum of BlueCardPoints, wonderWinPoints, RedCardPoints, GreenCardPoints, GoldenCardPoints, GuildPoints")
+TEST_CASE("")
 {
-	SUBCASE ("if a level is not 0/1/2/3 return 1, error information")
-		{
+	GoldenCard a(GoldenCardType::arena);
+	CHECK(GoldenCardType::arena==(&a)->returnType());
+	GoldenCard * b [10];
+	GoldenCard c(GoldenCardType::arena);
+	b[0]=&c;
+	CHECK(GoldenCardType::arena==b[0]->returnType());
 
-		}
+	Gracz Player;
+	Player.addGoldenCard(GoldenCardType::arena);
+	CHECK (int(GoldenCardType::arena)==(int(Player.returnGold(0)->returnType())));
 
 }*/
+
+
+
+
+TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
+{
+	SUBCASE ("addGoldenCard(GoldenCardType::arena) => gold[0]->type==GoldenCardType::arena, GoldenCardQuantity==1")
+	{
+		Gracz Player;
+		Player.addGoldenCard(GoldenCardType::arena);
+		CHECK (1==Player.returnGoldenCardQuantity());
+		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0)->returnType()));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

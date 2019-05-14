@@ -1,6 +1,6 @@
 #include "GoldenCard.hpp"
 
-int GoldenCard::countWinPoints (int nuberOfBrownCards, int nuberOfGoldCards, int nuberOfGreyCards)
+int GoldenCard::countWinPoints (int nuberOfBrownCards, int nuberOfGoldCards, int nuberOfGreyCards, wonder * W)
 {
 	switch (type)
 	{
@@ -16,6 +16,10 @@ int GoldenCard::countWinPoints (int nuberOfBrownCards, int nuberOfGoldCards, int
 		{
 			return (2*nuberOfGreyCards);
 		}
+		case GoldenCardType::arena:
+		{
+			return (W->returnWonderLevel());
+		}
 		default:
 		{
 			return 0;
@@ -24,6 +28,11 @@ int GoldenCard::countWinPoints (int nuberOfBrownCards, int nuberOfGoldCards, int
 }
 
 
+
+GoldenCardType GoldenCard::returnType ()
+{
+	return type;
+}
 GoldenCard::GoldenCard (GoldenCardType t)
 {
 	type=t;

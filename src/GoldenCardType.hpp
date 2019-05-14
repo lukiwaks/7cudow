@@ -10,5 +10,6 @@ enum class GoldenCardType
 	bazar, 
 	port, 
 	latarnia_morska, 
-	dom_handlowy
+	dom_handlowy,
+	arena
 };

@@ -42,10 +42,10 @@ symbol Gracz::returnGreen(int numer)
 	return green[numer];
 }
 
-/*int Gracz::getPointsResult()
+int Gracz::returnGoldenCardQuantity()
 {
-
-}*/
+	return GoldenCardQuantity;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -121,6 +121,25 @@ void Gracz::getWonder(wonder * W)
 	Wonder=W;
 }
 
+void Gracz::setNeighbours (Gracz * L, Gracz * R)
+{
+	Left=L;
+	Right=R;
+}
+
+void Gracz::addGoldenCard(GoldenCardType t)
+{
+	GoldenCard Card (t);
+	gold[GoldenCardQuantity]=&Card;
+	GoldenCardQuantity++;
+}
+
+GoldenCard * Gracz::returnGold (int i)
+{
+
+	return gold[i];
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()
@@ -130,4 +149,5 @@ Gracz::Gracz ()
  	GreyCardQuantity=0;
  	RedCardQuantity=0;
  	GreenCardQuantity=0;
+ 	GoldenCardQuantity=0;
 }
