@@ -1087,7 +1087,7 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 	}
 }
 
-
+/*
 TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 {
 	SUBCASE ("addGoldenCard(GoldenCardType::arena) => gold[0]->type==GoldenCardType::arena, GoldenCardQuantity==1")
@@ -1097,9 +1097,9 @@ TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 		CHECK (1==Player.returnGoldenCardQuantity());
 		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0)->returnType()));
 	}
-}
+}*/
 
-TEST_CASE ("testing Gracz::war()")
+TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 {
 	SUBCASE ("if there are no neighbors return 1, error")
 	{
@@ -1113,6 +1113,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(1));
 			CHECK (0==Player.returnRedCardWinPoints());
@@ -1122,6 +1128,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(1));
@@ -1132,6 +1144,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(1));
@@ -1142,6 +1160,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1153,6 +1177,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1164,6 +1194,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1175,6 +1211,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(1));
@@ -1185,6 +1227,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1199,6 +1247,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(2));
 			CHECK (0==Player.returnRedCardWinPoints());
@@ -1208,6 +1262,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(2));
@@ -1218,6 +1278,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(2));
@@ -1228,6 +1294,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1239,6 +1311,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1250,6 +1328,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1261,6 +1345,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(2));
@@ -1271,6 +1361,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1286,6 +1382,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(3));
 			CHECK (0==Player.returnRedCardWinPoints());
@@ -1295,6 +1397,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(3));
@@ -1305,6 +1413,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(3));
@@ -1315,6 +1429,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1326,6 +1446,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1337,6 +1463,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1348,6 +1480,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
 			CHECK (0==Player.war(3));
@@ -1358,6 +1496,12 @@ TEST_CASE ("testing Gracz::war()")
 			Gracz Player;
 			Gracz PlayerL;
 			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
@@ -1813,16 +1957,447 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 }*/
 
 
+TEST_CASE ("testing Gracz::war() with War Points from Wonder")
+{
+	SUBCASE ("if there are neighbors and era==1")
+	{
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 (from wonder) for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
 
+			CHECK (0==Player.war(1));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W1.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 0")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W3.addWonderLevel();
+			W3.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(1));
+			CHECK (0==Player.returnRedCardWinPoints());
+		}
+	}
+	SUBCASE ("if there are neighbors and era==2")
+	{
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 (from wonder) for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
 
+			CHECK (0==Player.war(2));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 3")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (3==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 6")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W1.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (6==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W3.addWonderLevel();
+			W3.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(2));
+			CHECK (2==Player.returnRedCardWinPoints());
+		}
+	}
+	SUBCASE ("if there are neighbors and era==3")
+		{
+		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 (from wonder) for left player , return 0, and change RedCardWinPoints-1")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-1==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
 
+			CHECK (0==Player.war(3));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			W3.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (-2==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 5")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			W1.addWonderLevel();
+			W2.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (5==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 10")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W1.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (10==Player.returnRedCardWinPoints());
+		}
+		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 4")
+		{
+			Gracz Player;
+			Gracz PlayerL;
+			Gracz PlayerR;
+			wonder W1 (wonderType::kolos_rodyjski_B);
+			wonder W2 (wonderType::kolos_rodyjski_B);
+			wonder W3 (wonderType::kolos_rodyjski_B);
+			Player.getWonder(&W1);
+			PlayerL.getWonder(&W2);
+			PlayerR.getWonder(&W3);
+			W1.addWonderLevel();
+			W3.addWonderLevel();
+			W3.addWonderLevel();
+			Player.setNeighbours (&PlayerL, &PlayerR);
+			CHECK (0==Player.war(3));
+			CHECK (4==Player.returnRedCardWinPoints());
+		}
+	}
+}
 
-
-
-
-
-
-
-
-
+TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
+{
+	SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 (from wonder) for left player , LosePoints=1")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W2.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (1==Player.returnLosePoints());
+	}
+	SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), LosePoints=2")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W3.addWonderLevel();
+		W2.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (2==Player.returnLosePoints());
+	}
+	SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), LosePoints=2")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W3.addWonderLevel();
+		W2.addWonderLevel();
+		W3.addWonderLevel();
+		W2.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (2==Player.returnLosePoints());
+	}
+	SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, LosePoints=0")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W1.addWonderLevel();
+		W2.addWonderLevel();
+		W1.addWonderLevel();
+		W2.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (0==Player.returnLosePoints());
+	}
+	SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, LosePoints=2")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W1.addWonderLevel();
+		W1.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (0==Player.returnLosePoints());
+	}
+	SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, LosePoints=0")
+	{
+		Gracz Player;
+		Gracz PlayerL;
+		Gracz PlayerR;
+		wonder W1 (wonderType::kolos_rodyjski_B);
+		wonder W2 (wonderType::kolos_rodyjski_B);
+		wonder W3 (wonderType::kolos_rodyjski_B);
+		Player.getWonder(&W1);
+		PlayerL.getWonder(&W2);
+		PlayerR.getWonder(&W3);
+		W1.addWonderLevel();
+		W3.addWonderLevel();
+		W3.addWonderLevel();
+		Player.setNeighbours (&PlayerL, &PlayerR);
+		Player.war(1);
+		CHECK (1==Player.returnLosePoints());
+	}
+}	
 

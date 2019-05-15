@@ -15,6 +15,8 @@ class Gracz
  		int GoldenCardQuantity;
  		int GuildQuantity;
  		int UniversalSymbolQuantity;
+ 		int WarPoints;
+ 		int LosePoints;
 
  		int BlueCardPoints;
  		int RedCardWarPoints;
@@ -41,6 +43,7 @@ class Gracz
 		int returnRedCardWarPoints();
 		int returnGreenCardPoints();
 		int returnRedCardWinPoints();
+		int returnLosePoints();
 
  		void addBlueCard(int pointsCount);
  		void addBrownCard();
@@ -52,7 +55,9 @@ class Gracz
  		void getWonder(wonder * W);
  		void setNeighbours (Gracz * L, Gracz * R);
  		void UniversalSymbolQuantityUpdate ();
+ 		void WarPointsUpdate ();
  		int returnUniversalSymbolQuantity();
+ 		int returnWarPoints ();
  		GoldenCard * returnGold (int i);
  		int war (int era);
  		Gracz ();

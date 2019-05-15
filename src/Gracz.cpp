@@ -146,28 +146,34 @@ GoldenCard * Gracz::returnGold (int i)
 
 	return gold[i];
 }
-
+#include <iostream>
 int Gracz::war (int era)
 {
 	if (Left==NULL||Right==NULL)
 	{
 		return 1;
 	}
+	WarPointsUpdate();
+	Left->WarPointsUpdate();
+	Right->WarPointsUpdate();
+	
 	int wynik=0;
 	int parameter=1+(era-1)*2;
-	if (RedCardWarPoints<Left->returnRedCardWarPoints())
+	if (WarPoints<Left->returnWarPoints())
 	{
 		wynik=wynik-1;
+		LosePoints++;
 	}
-	if (RedCardWarPoints<Right->returnRedCardWarPoints())
+	if (WarPoints<Right->returnWarPoints())
 	{
 		wynik=wynik-1;
+		LosePoints++;
 	}
-	if (RedCardWarPoints>Left->returnRedCardWarPoints())
+	if (WarPoints>Left->returnWarPoints())
 	{
 		wynik=wynik+parameter;
 	}
-	if (RedCardWarPoints>Right->returnRedCardWarPoints())
+	if (WarPoints>Right->returnWarPoints())
 	{
 		wynik=wynik+parameter;
 	}
@@ -198,6 +204,21 @@ int Gracz::returnUniversalSymbolQuantity()
 {
 	return UniversalSymbolQuantity;
 }
+
+void  Gracz::WarPointsUpdate ()
+{
+	WarPoints=RedCardWarPoints+Wonder->returnWonderWarPoints();
+
+}
+
+int Gracz::returnWarPoints ()
+{
+	return WarPoints;
+}
+int Gracz::returnLosePoints()
+{
+	return LosePoints;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()
@@ -214,4 +235,6 @@ Gracz::Gracz ()
  	Left=NULL;
  	Right=NULL;
  	UniversalSymbolQuantity=0;
+ 	WarPoints=0;
+ 	LosePoints=0;
 }
