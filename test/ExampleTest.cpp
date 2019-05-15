@@ -1087,7 +1087,7 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 	}
 }
 
-/*
+
 TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 {
 	SUBCASE ("addGoldenCard(GoldenCardType::arena) => gold[0]->type==GoldenCardType::arena, GoldenCardQuantity==1")
@@ -1098,7 +1098,7 @@ TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0)->returnType()));
 	}
 }
-*/
+
 TEST_CASE ("testing Gracz::war()")
 {
 	SUBCASE ("if there are no neighbors return 1, error")
@@ -1629,10 +1629,187 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
+	SUBCASE ("testing for GuildType::gildia_amatorow")
+	{
+		SUBCASE ("if PLr.GreyCardQuantity==0 and Plr.BrownCardQuantity==0 and Plr.GuildQuantity==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=0;
+			Plr.GreyCardQuantity=0;
+			Plr.BrownCardQuantity=0;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.GreyCardQuantity==1 and Plr.BrownCardQuantity==0 and Plr.GuildQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=0;
+			Plr.GreyCardQuantity=1;
+			Plr.BrownCardQuantity=0;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.GreyCardQuantity==0 and Plr.BrownCardQuantity==1 and Plr.GuildQuantity==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=0;
+			Plr.GreyCardQuantity=0;
+			Plr.BrownCardQuantity=1;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.GreyCardQuantity==0 and Plr.BrownCardQuantity==0 and Plr.GuildQuantity==1 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=1;
+			Plr.GreyCardQuantity=0;
+			Plr.BrownCardQuantity=0;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.GreyCardQuantity==1 and Plr.BrownCardQuantity==1 and Plr.GuildQuantity==1 return 3")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=1;
+			Plr.GreyCardQuantity=1;
+			Plr.BrownCardQuantity=1;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (3==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.GreyCardQuantity==3 and Plr.BrownCardQuantity==4 and Plr.GuildQuantity==1 return 8")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.GuildQuantity=1;
+			Plr.GreyCardQuantity=3;
+			Plr.BrownCardQuantity=4;
+			Guild G (GuildType::gildia_amatorow);
+			CHECK (8==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	SUBCASE ("testing for GuildType::gildia_budowniczych")
+	{
+		SUBCASE ("if PLr.WonderLevel==0 and L.WonderLevel==0 and R.WonderLevel==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=0;
+			L.WonderLevel=0;
+			R.WonderLevel=0;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.WonderLevel==0 and L.WonderLevel==1 and R.WonderLevel==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=0;
+			L.WonderLevel=1;
+			R.WonderLevel=0;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.WonderLevel==0 and L.WonderLevel==0 and R.WonderLevel==1 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=0;
+			L.WonderLevel=0;
+			R.WonderLevel=1;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==0 and R.WonderLevel==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=1;
+			L.WonderLevel=0;
+			R.WonderLevel=0;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==1 and R.WonderLevel==1 return 3")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=1;
+			L.WonderLevel=1;
+			R.WonderLevel=1;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (3==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==2 and R.WonderLevel==3 return 6")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			Plr.WonderLevel=1;
+			L.WonderLevel=2;
+			R.WonderLevel=3;
+			Guild G (GuildType::gildia_budowniczych);
+			CHECK (6==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
+	//Gildia Strategow jest nieogarnieta.
+}
 
-	//Gildia Amatorow, Budowniczych, Naukowcow, Strategow nie sa ogarniete.
-
-
+TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
+{
+	SUBCASE ("when Woder.WonderUniversalSymbol==0, and there is no gildia_naukowcow then PlayerUniversalSymbolQuantity=0")
+	{
+		Gracz Player;
+		wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&W);
+		Player.UniversalSymbolQuantityUpdate();
+		CHECK(0==Player.returnUniversalSymbolQuantity());
+	}
+	SUBCASE ("when Woder.WonderUniversalSymbol==1, and there is no gildia_naukowcow then PlayerUniversalSymbolQuantity=1")
+	{
+		Gracz Player;
+		wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&W);
+		W.addWonderLevel();
+		W.addWonderLevel();
+		Player.UniversalSymbolQuantityUpdate();
+		CHECK(1==Player.returnUniversalSymbolQuantity());
+	}
+	SUBCASE ("when Woder.WonderUniversalSymbol==0, and there is one gildia_naukowcow then PlayerUniversalSymbolQuantity=1")
+	{
+		Gracz Player;
+		wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&W);
+		Player.addGuild(GuildType::gildia_naukowcow);
+		Player.UniversalSymbolQuantityUpdate();
+		CHECK(1==Player.returnUniversalSymbolQuantity());
+	}
+	SUBCASE ("when Woder.WonderUniversalSymbol==1, and there is one gildia_naukowcow then PlayerUniversalSymbolQuantity=2")
+	{
+		Gracz Player;
+		wonder W (wonderType::wiszace_ogrody_semiramidy_A);
+		Player.getWonder (&W);
+		Player.addGuild(GuildType::gildia_budowniczych);
+		Player.addGuild(GuildType::gildia_filozofow);
+		Player.addGuild(GuildType::gildia_naukowcow);
+		Player.UniversalSymbolQuantityUpdate();
+		CHECK(2==Player.returnUniversalSymbolQuantity());
+	}
 }
 
 

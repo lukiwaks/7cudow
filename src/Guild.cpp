@@ -54,7 +54,7 @@ int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAnd
 		}
 		case GuildType::gildia_amatorow:
 		{
-			return 0;
+			return (Player.BrownCardQuantity+Player.GreyCardQuantity+Player.GuildQuantity);
 		}
 		default:
 		{
@@ -66,4 +66,9 @@ int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAnd
 Guild::Guild (GuildType t)
 {
 	type=t;
+}
+
+GuildType Guild::returnType ()
+{
+	return type;
 }

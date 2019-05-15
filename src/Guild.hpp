@@ -21,6 +21,7 @@ struct CardsAndWonder
  	int RedCardQuantity;
  	int GreenCardQuantity;
  	int GoldenCardQuantity;
+ 	int GuildQuantity;
  	int WonderLevel;
 };
 
@@ -31,5 +32,6 @@ class Guild
 	public:
 		int coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAndWonder Right);
 		Guild (GuildType t);
+		GuildType returnType ();
 };
 

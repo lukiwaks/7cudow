@@ -74,8 +74,8 @@ void Gracz::addGreenCard(symbol Symbol)
 }
 int Gracz::returnGreenCardPoints()
 {
-	int UP=Wonder->returnWonderUniversalSymbol();
-	if ((GreenCardQuantity+UP)==0)
+	UniversalSymbolQuantityUpdate ();
+	if ((GreenCardQuantity+UniversalSymbolQuantity)==0)
 	{
 		return 0;
 	}
@@ -101,15 +101,15 @@ int Gracz::returnGreenCardPoints()
 		}
 		if (sumTablica>=sumKolo&&sumTablica>=sumCyrkiel)
 		{
-			sumTablica=sumTablica+UP;
+			sumTablica=sumTablica+UniversalSymbolQuantity;
 		}
 		else if (sumKolo>=sumTablica&&sumKolo>=sumCyrkiel)
 		{
-			sumKolo=sumKolo+UP;
+			sumKolo=sumKolo+UniversalSymbolQuantity;
 		}
 		else 
 		{
-			sumCyrkiel=sumCyrkiel+UP;
+			sumCyrkiel=sumCyrkiel+UniversalSymbolQuantity;
 		}
 		int wynik = sumTablica*sumTablica+sumKolo*sumKolo+sumCyrkiel*sumCyrkiel;
 		return wynik;
@@ -134,11 +134,19 @@ void Gracz::addGoldenCard(GoldenCardType t)
 	GoldenCardQuantity++;
 }
 
+void Gracz::addGuild(GuildType t)
+{
+	Guild Card (t);
+	guild[GuildQuantity]=&Card;
+	GuildQuantity++;
+}
+
 GoldenCard * Gracz::returnGold (int i)
 {
 
 	return gold[i];
 }
+
 int Gracz::war (int era)
 {
 	if (Left==NULL||Right==NULL)
@@ -166,11 +174,30 @@ int Gracz::war (int era)
 	RedCardWinPoints=wynik;
 	return 0;
 }
+
 int Gracz::returnRedCardWinPoints()
 {
 	return RedCardWinPoints;
 }
 
+void Gracz::UniversalSymbolQuantityUpdate ()
+{
+	int sum=0;
+	for (int i=0; i<GuildQuantity; i++)
+	{
+		if (GuildType::gildia_naukowcow==(guild[i]->returnType()))
+		{
+			sum++;
+		}
+	}
+	sum=sum+Wonder->returnWonderUniversalSymbol();
+	UniversalSymbolQuantity=sum;
+}
+
+int Gracz::returnUniversalSymbolQuantity()
+{
+	return UniversalSymbolQuantity;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()
@@ -183,6 +210,8 @@ Gracz::Gracz ()
  	GoldenCardQuantity=0;
  	RedCardWinPoints=0;
  	RedCardWarPoints=0;
+ 	int GuidQuantity=0;
  	Left=NULL;
  	Right=NULL;
+ 	UniversalSymbolQuantity=0;
 }
