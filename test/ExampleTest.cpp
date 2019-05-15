@@ -938,8 +938,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		Gracz Player;
 		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
 		Player.getWonder (&Wonder);
-		int test=Player.returnGreenCardPoints();
-		CHECK (0==test);
+		Player.GreenCardPointsUpdate();
+		CHECK (0==Player.returnGreenPoints());
 	}
 	SUBCASE ("if GreenCardQuantity==1 return 1 and there isn't wonder UniversalSymbol. Check for kolo symbol.")
 	{
@@ -947,8 +947,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
 		Player.getWonder (&Wonder);
 		Player.addGreenCard(symbol::kolo);
-		int test=Player.returnGreenCardPoints();
-		CHECK (1==test);
+		Player.GreenCardPointsUpdate();
+		CHECK (1==Player.returnGreenPoints());
 	}
 	SUBCASE ("if GreenCardQuantity==1 return 1 and there isn't wonder UniversalSymbol. Check for tablica symbol.")
 	{
@@ -956,8 +956,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		wonder Wonder(wonderType::wiszace_ogrody_semiramidy_A);
 		Player.getWonder (&Wonder);
 		Player.addGreenCard(symbol::tablica);
-		int test=Player.returnGreenCardPoints();
-		CHECK (1==test);
+		Player.GreenCardPointsUpdate();
+		CHECK (1==Player.returnGreenPoints());
 	}
 	SUBCASE ("if GreenCardQuantity==2 and there isn't wonder UniversalSymbol")
 	{
@@ -968,8 +968,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.getWonder (&Wonder);
 			Player.addGreenCard(symbol::tablica);
 			Player.addGreenCard(symbol::tablica);
-			int test=Player.returnGreenCardPoints();
-			CHECK (4==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (4==Player.returnGreenPoints());
 		}
 		SUBCASE ("if symbol green [0]==symbol green [1] return 4")
 		{
@@ -978,8 +978,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.getWonder (&Wonder);
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::kolo);
-			int test=Player.returnGreenCardPoints();
-			CHECK (4==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (4==Player.returnGreenPoints());
 		}
 		SUBCASE ("if symbol green [0]!=symbol green [1] return 2")
 		{
@@ -988,8 +988,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.getWonder (&Wonder);
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::cyrkiel);
-			int test=Player.returnGreenCardPoints();
-			CHECK (2==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (2==Player.returnGreenPoints());
 		}
 		SUBCASE ("if symbol green [0]!=symbol green [1] return 2")
 		{
@@ -998,8 +998,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.getWonder (&Wonder);
 			Player.addGreenCard(symbol::tablica);
 			Player.addGreenCard(symbol::cyrkiel);
-			int test=Player.returnGreenCardPoints();
-			CHECK (2==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (2==Player.returnGreenPoints());
 		}
 	}
 	SUBCASE ("if GreenCardQuantity==3 and there isn't wonder UniversalSymbol")
@@ -1012,8 +1012,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.addGreenCard(symbol::tablica);
 			Player.addGreenCard(symbol::tablica);
 			Player.addGreenCard(symbol::tablica);
-			int test=Player.returnGreenCardPoints();
-			CHECK (9==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (9==Player.returnGreenPoints());
 		}
 		SUBCASE ("if symbol green [0]==symbol green [1]!= symbol green [2]return 5")
 		{
@@ -1023,8 +1023,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::cyrkiel);
-			int test=Player.returnGreenCardPoints();
-			CHECK (5==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (5==Player.returnGreenPoints());
 		}
 		SUBCASE ("if symbol green [0]!=symbol green [1]!=symbol green [2] return 3")
 		{
@@ -1034,8 +1034,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::cyrkiel);
 			Player.addGreenCard(symbol::tablica);
-			int test=Player.returnGreenCardPoints();
-			CHECK (3==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (3==Player.returnGreenPoints());
 		}
 
 	}
@@ -1050,8 +1050,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 		Player.addGreenCard(symbol::cyrkiel);
 		Player.addGreenCard(symbol::kolo);
 		Player.addGreenCard(symbol::cyrkiel);
-		int test=Player.returnGreenCardPoints();
-		CHECK (14==test);
+		Player.GreenCardPointsUpdate();
+		CHECK (14==Player.returnGreenPoints());
 	}
 	SUBCASE ("When woderUniversalSymbol!=0")
 	{
@@ -1065,8 +1065,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::cyrkiel);
-			int test=Player.returnGreenCardPoints();
-			CHECK (10==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (10==Player.returnGreenPoints());
 		}
 		SUBCASE ("if GreenCardQuantity==6 and there isn't wonder UniversalSymbol, green[0]==kolo, green[1]==tablica, green[2]==kolo, green[3]==cyrkiel, green[4]==kolo, green[5]==cyrkiel and woderUniversalSymbol==1 return 21")
 		{
@@ -1081,8 +1081,8 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 			Player.addGreenCard(symbol::cyrkiel);
 			Player.addGreenCard(symbol::kolo);
 			Player.addGreenCard(symbol::cyrkiel);
-			int test=Player.returnGreenCardPoints();
-			CHECK (21==test);
+			Player.GreenCardPointsUpdate();
+			CHECK (21==Player.returnGreenPoints());
 		}
 	}
 }
@@ -1099,12 +1099,12 @@ TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 	}
 }*/
 
-TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
+TEST_CASE ("testing Gracz::finishEra() only with RedCardsWarPoints")
 {
 	SUBCASE ("if there are no neighbors return 1, error")
 	{
 		Gracz Player;
-		CHECK (1==Player.war(1));
+		CHECK (1==Player.finishEra(1));
 	}
 	SUBCASE ("if there are neighbors and era==1")
 	{
@@ -1120,7 +1120,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerL.getWonder(&W2);
 			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (0==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
@@ -1136,7 +1136,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
@@ -1152,7 +1152,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1169,7 +1169,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1186,7 +1186,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 1")
@@ -1203,7 +1203,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 2")
@@ -1219,7 +1219,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 0")
@@ -1236,7 +1236,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (0==Player.returnRedCardWinPoints());
 		}
 	}
@@ -1254,7 +1254,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerL.getWonder(&W2);
 			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (0==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
@@ -1270,7 +1270,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
@@ -1286,7 +1286,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1303,7 +1303,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1320,7 +1320,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 3")
@@ -1337,7 +1337,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (3==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 6")
@@ -1353,7 +1353,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (6==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 2")
@@ -1370,7 +1370,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (2==Player.returnRedCardWinPoints());
 		}
 
@@ -1389,7 +1389,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerL.getWonder(&W2);
 			PlayerR.getWonder(&W3);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (0==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 for left player , return 0, and change RedCardWinPoints-1")
@@ -1405,7 +1405,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and left player, and warPoinst==1 for right player , return 0, and change RedCardWinPoints-1")
@@ -1421,7 +1421,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			PlayerR.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1438,7 +1438,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(1);
 			PlayerL.addRedCard(1);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==4 for right player left player, return 0, and change RedCardWinPoints-2")
@@ -1455,7 +1455,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.addRedCard(4);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL and warPoinst==0 for right player, return 0, and change RedCardWinPoints 5")
@@ -1472,7 +1472,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (5==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 10")
@@ -1488,7 +1488,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			PlayerR.getWonder(&W3);
 			Player.addRedCard(2);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (10==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and warPoinst==0 for right player and 4 for left player, return 0, and change RedCardWinPoints 4")
@@ -1505,7 +1505,7 @@ TEST_CASE ("testing Gracz::war() only with RedCardsWarPoints")
 			Player.addRedCard(2);
 			PlayerL.addRedCard(4);
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (4==Player.returnRedCardWinPoints());
 		}
 
@@ -1911,7 +1911,59 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CHECK (6==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
-	//Gildia Strategow jest nieogarnieta.
+	SUBCASE ("testing for GuildType::gildia_strategow")
+	{
+		SUBCASE ("if L.LosePoints==0 and R.LosePoints==0 return 0")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.LosePoints=0;
+			R.LosePoints=0;
+			Guild G (GuildType::gildia_strategow);
+			CHECK (0==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if L.LosePoints==1 and R.LosePoints==0 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.LosePoints=1;
+			R.LosePoints=0;
+			Guild G (GuildType::gildia_strategow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if L.LosePoints==0 and R.LosePoints==1 return 1")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.LosePoints=0;
+			R.LosePoints=1;
+			Guild G (GuildType::gildia_strategow);
+			CHECK (1==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if L.LosePoints==1 and R.LosePoints==1 return 2")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.LosePoints=1;
+			R.LosePoints=1;
+			Guild G (GuildType::gildia_strategow);
+			CHECK (2==G.coutGuildPoints(Plr, L, R) );
+		}
+		SUBCASE ("if L.LosePoints==2 and R.LosePoints==3 return 5")
+		{
+			CardsAndWonder Plr;
+			CardsAndWonder L;
+			CardsAndWonder R;
+			L.LosePoints=2;
+			R.LosePoints=3;
+			Guild G (GuildType::gildia_strategow);
+			CHECK (5==G.coutGuildPoints(Plr, L, R) );
+		}
+	}
 }
 /*
 TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
@@ -1957,7 +2009,7 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 }*/
 
 
-TEST_CASE ("testing Gracz::war() with War Points from Wonder")
+TEST_CASE ("testing Gracz::finishEra() with War Points from Wonder")
 {
 	SUBCASE ("if there are neighbors and era==1")
 	{
@@ -1974,7 +2026,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			PlayerR.getWonder(&W3);
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -1992,7 +2044,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
 
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -2011,7 +2063,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 1")
@@ -2030,7 +2082,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 2")
@@ -2047,7 +2099,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W1.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 0")
@@ -2065,7 +2117,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W3.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(1));
+			CHECK (0==Player.finishEra(1));
 			CHECK (0==Player.returnRedCardWinPoints());
 		}
 	}
@@ -2084,7 +2136,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			PlayerR.getWonder(&W3);
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -2102,7 +2154,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
 
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -2121,7 +2173,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 3")
@@ -2140,7 +2192,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (3==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 6")
@@ -2157,7 +2209,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W1.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (6==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 2")
@@ -2175,7 +2227,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W3.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(2));
+			CHECK (0==Player.finishEra(2));
 			CHECK (2==Player.returnRedCardWinPoints());
 		}
 	}
@@ -2194,7 +2246,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			PlayerR.getWonder(&W3);
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-1==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -2212,7 +2264,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
 
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), return 0, and change RedCardWinPoints-2")
@@ -2231,7 +2283,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (-2==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, return 0, and change RedCardWinPoints 5")
@@ -2250,7 +2302,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W2.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (5==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, return 0, and change RedCardWinPoints 10")
@@ -2267,7 +2319,7 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W1.addWonderLevel();
 			W1.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (10==Player.returnRedCardWinPoints());
 		}
 		SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, return 0, and change RedCardWinPoints 4")
@@ -2285,13 +2337,13 @@ TEST_CASE ("testing Gracz::war() with War Points from Wonder")
 			W3.addWonderLevel();
 			W3.addWonderLevel();
 			Player.setNeighbours (&PlayerL, &PlayerR);
-			CHECK (0==Player.war(3));
+			CHECK (0==Player.finishEra(3));
 			CHECK (4==Player.returnRedCardWinPoints());
 		}
 	}
 }
 
-TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
+TEST_CASE ("testing Gracz::finishEra() for changing Gracz::losePoints")
 {
 	SUBCASE ("warPoinst==0 for player and right player, and warPoinst==1 (from wonder) for left player , LosePoints=1")
 	{
@@ -2306,7 +2358,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		PlayerR.getWonder(&W3);
 		W2.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (1==Player.returnLosePoints());
 	}
 	SUBCASE ("warPoinst==0 for player and warPoinst==1 for right player left player (from wonder), LosePoints=2")
@@ -2323,7 +2375,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		W3.addWonderLevel();
 		W2.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (2==Player.returnLosePoints());
 	}
 	SUBCASE ("warPoinst==0 for player and warPoinst==2 for right player left player (from wonder), LosePoints=2")
@@ -2342,7 +2394,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		W3.addWonderLevel();
 		W2.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (2==Player.returnLosePoints());
 	}
 	SUBCASE ("warPoinst==2 for player and PlayerL (from wonder) and warPoinst==0 for right player, LosePoints=0")
@@ -2361,7 +2413,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		W1.addWonderLevel();
 		W2.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (0==Player.returnLosePoints());
 	}
 	SUBCASE ("warPoinst==2 for player (from wonder) and warPoinst==0 for right player left player, LosePoints=2")
@@ -2378,7 +2430,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		W1.addWonderLevel();
 		W1.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (0==Player.returnLosePoints());
 	}
 	SUBCASE ("warPoinst==1 for player and warPoinst==0 for right player and 2 for left player, LosePoints=0")
@@ -2396,7 +2448,7 @@ TEST_CASE ("testing Gracz::war() for changing Gracz::losePoints")
 		W3.addWonderLevel();
 		W3.addWonderLevel();
 		Player.setNeighbours (&PlayerL, &PlayerR);
-		Player.war(1);
+		Player.finishEra(1);
 		CHECK (1==Player.returnLosePoints());
 	}
 }	

@@ -23,6 +23,7 @@ struct CardsAndWonder
  	int GoldenCardQuantity;
  	int GuildQuantity;
  	int WonderLevel;
+ 	int LosePoints;
 };
 
 class Guild

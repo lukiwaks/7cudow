@@ -72,12 +72,12 @@ void Gracz::addGreenCard(symbol Symbol)
 	green[GreenCardQuantity]=Symbol;
 	GreenCardQuantity++;
 }
-int Gracz::returnGreenCardPoints()
+void Gracz::GreenCardPointsUpdate()
 {
 	UniversalSymbolQuantityUpdate ();
 	if ((GreenCardQuantity+UniversalSymbolQuantity)==0)
 	{
-		return 0;
+		GreenPoints=0;
 	}
 	else
 	{
@@ -112,7 +112,7 @@ int Gracz::returnGreenCardPoints()
 			sumCyrkiel=sumCyrkiel+UniversalSymbolQuantity;
 		}
 		int wynik = sumTablica*sumTablica+sumKolo*sumKolo+sumCyrkiel*sumCyrkiel;
-		return wynik;
+		GreenPoints=wynik;
 	}
 }
 
@@ -147,7 +147,7 @@ GoldenCard * Gracz::returnGold (int i)
 	return gold[i];
 }
 #include <iostream>
-int Gracz::war (int era)
+int Gracz::finishEra (int era)
 {
 	if (Left==NULL||Right==NULL)
 	{
@@ -219,6 +219,14 @@ int Gracz::returnLosePoints()
 {
 	return LosePoints;
 }
+void Gracz::BlackPointsUpdate()
+{
+	BlackPoints=Wonder->returnWonderWinPoints();
+}
+int Gracz::returnGreenPoints()
+{
+	return GreenPoints;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()
@@ -229,7 +237,6 @@ Gracz::Gracz ()
  	RedCardQuantity=0;
  	GreenCardQuantity=0;
  	GoldenCardQuantity=0;
- 	RedCardWinPoints=0;
  	RedCardWarPoints=0;
  	int GuidQuantity=0;
  	Left=NULL;
@@ -237,4 +244,12 @@ Gracz::Gracz ()
  	UniversalSymbolQuantity=0;
  	WarPoints=0;
  	LosePoints=0;
+
+ 	GreenPoints=0;
+ 	RedCardWinPoints=0;
+ 	BlueCardPoints=0;
+ 	BlackPoints=0; 
+ 	GoldPoints=0; 
+ 	VioletPoints=0; 
+ 	MoneyPoints=0;
 }

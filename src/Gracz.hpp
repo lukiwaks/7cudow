@@ -17,10 +17,9 @@ class Gracz
  		int UniversalSymbolQuantity;
  		int WarPoints;
  		int LosePoints;
-
- 		int BlueCardPoints;
  		int RedCardWarPoints;
- 		int RedCardWinPoints;
+
+ 		
  		symbol green [20];
 		GoldenCard *gold[20];
 		Guild *guild[20];
@@ -29,6 +28,14 @@ class Gracz
  		Gracz * Left;
  		Gracz * Right;
 
+ 		int GreenPoints; //sum of symbool win points. Updating using GreenPointsUpdate()
+ 		int RedCardWinPoints;
+ 		int BlueCardPoints;
+ 		int BlackPoints; //sum of win points from wonder. Updating using BlackPointsUpdate()
+ 		int GoldPoints; //sum of win points from golden cards. Updating using GoldPointsUpdate()
+ 		int VioletPoints; //sum of win points from Guilds. Updating using VioletPointsUpdate()
+ 		int MoneyPoints; //not implemented
+ 		int WinPointsSum; //sum of all Win Points.  Updating using WinPointsSumUpdate()
 
  	public:
  		int returnBlueCardQuantity();
@@ -41,9 +48,11 @@ class Gracz
 
 		int returnBlueCardPoints();
 		int returnRedCardWarPoints();
-		int returnGreenCardPoints();
+		void GreenCardPointsUpdate();
 		int returnRedCardWinPoints();
 		int returnLosePoints();
+		int returnGreenPoints();
+		int getPointsResult(); // do zaimplementowania
 
  		void addBlueCard(int pointsCount);
  		void addBrownCard();
@@ -59,8 +68,12 @@ class Gracz
  		int returnUniversalSymbolQuantity();
  		int returnWarPoints ();
  		GoldenCard * returnGold (int i);
- 		int war (int era);
+ 		int finishEra (int era);
+ 		void BlackPointsUpdate();
+ 		void WinPointsSumUpdate();
  		Gracz ();
+
+
  		
 };
 

@@ -3,14 +3,6 @@
 struct CardsAndWonder;
 
 
-int gildia_strategow(CardsAndWonder Player, CardsAndWonder Left, CardsAndWonder Right)
-{
-	return 0;//lo matko boska
-}
-int gildia_naukowcow(CardsAndWonder Player, CardsAndWonder Left, CardsAndWonder Right)
-{
-	return 0;//lo matko boska
-}
 
 int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAndWonder Right)
 {
@@ -38,11 +30,11 @@ int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAnd
 		}
 		case GuildType::gildia_strategow:
 		{
-			return gildia_strategow(Player, Left, Right);
+			return Left.LosePoints+Right.LosePoints;
 		}
 		case GuildType::gildia_naukowcow:
 		{
-			return gildia_naukowcow(Player, Left, Right);
+			return 0;
 		}
 		case GuildType::gildia_sedziow:
 		{
@@ -56,6 +48,7 @@ int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAnd
 		{
 			return (Player.BrownCardQuantity+Player.GreyCardQuantity+Player.GuildQuantity);
 		}
+
 		default:
 		{
 			return 0;
