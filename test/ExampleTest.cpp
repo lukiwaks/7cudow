@@ -1769,7 +1769,7 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 	}
 	//Gildia Strategow jest nieogarnieta.
 }
-
+/*
 TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 {
 	SUBCASE ("when Woder.WonderUniversalSymbol==0, and there is no gildia_naukowcow then PlayerUniversalSymbolQuantity=0")
@@ -1810,7 +1810,7 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 		Player.UniversalSymbolQuantityUpdate();
 		CHECK(2==Player.returnUniversalSymbolQuantity());
 	}
-}
+}*/
 
 
 
