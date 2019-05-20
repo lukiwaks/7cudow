@@ -56,9 +56,14 @@ int Guild::coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAnd
 	}
 }
 
-Guild::Guild (GuildType t)
+void Guild::GetType (GuildType t)
 {
 	type=t;
+}
+
+Guild::Guild ()
+{
+
 }
 
 GuildType Guild::returnType ()

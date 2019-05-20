@@ -33,7 +33,12 @@ GoldenCardType GoldenCard::returnType ()
 {
 	return type;
 }
-GoldenCard::GoldenCard (GoldenCardType t)
+
+GoldenCard::GoldenCard ()
+{
+}
+
+void GoldenCard::GetType (GoldenCardType t)
 {
 	type=t;
 }

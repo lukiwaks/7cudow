@@ -202,12 +202,14 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	{
 		SUBCASE("if type of card is tawerna it sohuld return 0")
 		{
-			GoldenCard Card (GoldenCardType::tawerna);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::tawerna);
 			CHECK (0==Card.countWinPoints(2,2,26,NULL));
 		}
 		SUBCASE("if type of card is bazar it should return 0")
 		{
-			GoldenCard Card (GoldenCardType::bazar);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::bazar);
 			CHECK (0==Card.countWinPoints(3,4,6,NULL));
 		}
 	}
@@ -215,17 +217,20 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	{
 		SUBCASE("if nuberOfBrownCards is 0 return 0")
 		{
-			GoldenCard Card (GoldenCardType::port);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::port);
 			CHECK (0==Card.countWinPoints(0,24,26,NULL));
 		}
 		SUBCASE("if nuberOfBrownCards is 1 return 1")
 		{
-			GoldenCard Card (GoldenCardType::port);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::port);
 			CHECK (1==Card.countWinPoints(1,2,2,NULL));
 		}
 		SUBCASE("if nuberOfBrownCards is 55 return 55")
 		{
-			GoldenCard Card (GoldenCardType::port);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::port);
 			CHECK (55==Card.countWinPoints(55,4,6,NULL));
 		}
 		
@@ -234,17 +239,20 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	{
 		SUBCASE("if nuberOfGoldenCards is 0 return 0")
 		{
-			GoldenCard Card (GoldenCardType::latarnia_morska);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::latarnia_morska);
 			CHECK (0==Card.countWinPoints(12,0,3,NULL));
 		}
 		SUBCASE("if nuberOfGoldenCards is 1 return 1")
 		{
-			GoldenCard Card (GoldenCardType::latarnia_morska);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::latarnia_morska);
 			CHECK (1==Card.countWinPoints(13,1,12,NULL));
 		}
 		SUBCASE("if nuberOfGoldenCards is 5 return 5")
 		{
-			GoldenCard Card (GoldenCardType::latarnia_morska);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::latarnia_morska);
 			CHECK (5==Card.countWinPoints(4,5,26,NULL));
 		}
 	}
@@ -252,24 +260,28 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	{
 		SUBCASE("if nuberOfGreyCards is 0 return 0")
 		{
-			GoldenCard Card (GoldenCardType::dom_handlowy);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::dom_handlowy);
 			CHECK (0==Card.countWinPoints(2,7,0,NULL));
 		}
 		SUBCASE("if nuberOfGreyCards is 1 return 2")
 		{
-			GoldenCard Card (GoldenCardType::dom_handlowy);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::dom_handlowy);
 			CHECK (2==Card.countWinPoints(12,7,1,NULL));
 		}
 		SUBCASE("if nuberOfGreyCards is 8 return 16")
 		{
-			GoldenCard Card (GoldenCardType::dom_handlowy);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::dom_handlowy);
 			CHECK (16==Card.countWinPoints(3,4,8,NULL));
 		}
 	}
 	SUBCASE("if type of card is arena it should return woder::level")
 	{
 		{
-			GoldenCard Card (GoldenCardType::arena);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::arena);
 			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
 			CHECK (0==Card.countWinPoints(12,7,1,&W));
 		}
@@ -277,7 +289,8 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	SUBCASE("if type of card is arena it should return woder::level")
 	{
 		{
-			GoldenCard Card (GoldenCardType::arena);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::arena);
 			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
 			W.addWonderLevel();
 			CHECK (1==Card.countWinPoints(12,7,1,&W));
@@ -286,7 +299,8 @@ TEST_CASE("testing int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCar
 	SUBCASE("if type of card is arena it should return woder::level")
 	{
 		{
-			GoldenCard Card (GoldenCardType::arena);
+			GoldenCard Card;
+			Card.GetType(GoldenCardType::arena);
 			wonder W (wonderType::wiszace_ogrody_semiramidy_A);
 			W.addWonderLevel();
 			W.addWonderLevel();
@@ -931,7 +945,7 @@ TEST_CASE("testing void addWonderLevel () used by class wonder")
 		}
 	}
 }
-TEST_CASE("testing int Gracz::returnGreenCardPoints().")
+TEST_CASE("testing int Gracz::GreenCardPointsUpdate()")
 {
 	SUBCASE ("if GreenCardQuantity==1 return 0 and there isn't wonder UniversalSymbol")
 	{
@@ -1087,7 +1101,7 @@ TEST_CASE("testing int Gracz::returnGreenCardPoints().")
 	}
 }
 
-/*
+
 TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 {
 	SUBCASE ("addGoldenCard(GoldenCardType::arena) => gold[0]->type==GoldenCardType::arena, GoldenCardQuantity==1")
@@ -1095,9 +1109,19 @@ TEST_CASE("testing Gracz::addGoldenCard(GoldenCardType t)")
 		Gracz Player;
 		Player.addGoldenCard(GoldenCardType::arena);
 		CHECK (1==Player.returnGoldenCardQuantity());
-		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0)->returnType()));
+		CHECK (int(GoldenCardType::arena)==int(Player.returnGold(0).returnType()));
 	}
-}*/
+	SUBCASE ("addGoldenCard(GoldenCardType::latarnia_morska) and addGoldenCard(GoldenCardType::dom_handlowy) => gold[0]->type==GoldenCardType::latarnia_morska, gold[0]->type==GoldenCardType::dom_handlowy, GoldenCardQuantity==2")
+	{
+		Gracz Player;
+		Player.addGoldenCard(GoldenCardType::dom_handlowy);
+		Player.addGoldenCard(GoldenCardType::latarnia_morska);
+		CHECK (2==Player.returnGoldenCardQuantity());
+		CHECK (int(GoldenCardType::dom_handlowy)==int(Player.returnGold(0).returnType()));
+		CHECK (int(GoldenCardType::latarnia_morska)==int(Player.returnGold(1).returnType()));
+	}
+
+}
 
 TEST_CASE ("testing Gracz::finishEra() only with RedCardsWarPoints")
 {
@@ -1524,7 +1548,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BrownCardQuantity=0;
 			R.BrownCardQuantity=0;
-			Guild G (GuildType::gildia_robotnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_robotnikow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BrownCardQuantity==1 and Right.BrownCardQuantity==0 return 1")
@@ -1534,7 +1559,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BrownCardQuantity=1;
 			R.BrownCardQuantity=0;
-			Guild G (GuildType::gildia_robotnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_robotnikow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BrownCardQuantity==1 and Right.BrownCardQuantity==1 return 2")
@@ -1544,7 +1570,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BrownCardQuantity=1;
 			R.BrownCardQuantity=1;
-			Guild G (GuildType::gildia_robotnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_robotnikow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BrownCardQuantity==4 and Right.BrownCardQuantity==12 return 16")
@@ -1554,7 +1581,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BrownCardQuantity=4;
 			R.BrownCardQuantity=12;
-			Guild G (GuildType::gildia_robotnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_robotnikow);
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1567,7 +1595,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreyCardQuantity=0;
 			R.GreyCardQuantity=0;
-			Guild G (GuildType::gildia_rzemieslnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_rzemieslnikow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreyCardQuantity==1 and Right.GreyCardQuantity==0 return 2")
@@ -1577,7 +1606,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreyCardQuantity=1;
 			R.GreyCardQuantity=0;
-			Guild G (GuildType::gildia_rzemieslnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_rzemieslnikow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreyCardQuantity==1 and Right.GreyCardQuantity==1 return 4")
@@ -1587,7 +1617,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreyCardQuantity=1;
 			R.GreyCardQuantity=1;
-			Guild G (GuildType::gildia_rzemieslnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_rzemieslnikow);
 			CHECK (4==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreyCardQuantity==4 and Right.GreyCardQuantity==12 return 32")
@@ -1597,7 +1628,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreyCardQuantity=4;
 			R.GreyCardQuantity=12;
-			Guild G (GuildType::gildia_rzemieslnikow);
+			Guild G;
+			G.GetType(GuildType::gildia_rzemieslnikow);
 			CHECK (32==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1610,7 +1642,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GoldenCardQuantity=0;
 			R.GoldenCardQuantity=0;
-			Guild G (GuildType::gildia_kupcow);
+			Guild G;
+			G.GetType(GuildType::gildia_kupcow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GoldenCardQuantity==1 and Right.GoldenCardQuantity==0 return 1")
@@ -1620,7 +1653,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GoldenCardQuantity=1;
 			R.GoldenCardQuantity=0;
-			Guild G (GuildType::gildia_kupcow);
+			Guild G;
+			G.GetType(GuildType::gildia_kupcow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GoldenCardQuantity==1 and Right.GoldenCardQuantity==1 return 2")
@@ -1630,7 +1664,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GoldenCardQuantity=1;
 			R.GoldenCardQuantity=1;
-			Guild G (GuildType::gildia_kupcow);
+			Guild G;
+			G.GetType(GuildType::gildia_kupcow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GoldenCardQuantity==4 and Right.GoldenCardQuantity==12 return 16")
@@ -1640,7 +1675,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GoldenCardQuantity=4;
 			R.GoldenCardQuantity=12;
-			Guild G (GuildType::gildia_kupcow);
+			Guild G;
+			G.GetType(GuildType::gildia_kupcow);
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1653,7 +1689,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreenCardQuantity=0;
 			R.GreenCardQuantity=0;
-			Guild G (GuildType::gildia_filozofow);
+			Guild G;
+			G.GetType(GuildType::gildia_filozofow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreenCardQuantity==1 and Right.GreenCardQuantity==0 return 1")
@@ -1663,7 +1700,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreenCardQuantity=1;
 			R.GreenCardQuantity=0;
-			Guild G (GuildType::gildia_filozofow);
+			Guild G;
+			G.GetType(GuildType::gildia_filozofow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreenCardQuantity==1 and Right.GreenCardQuantity==1 return 2")
@@ -1673,7 +1711,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreenCardQuantity=1;
 			R.GreenCardQuantity=1;
-			Guild G (GuildType::gildia_filozofow);
+			Guild G;
+			G.GetType(GuildType::gildia_filozofow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.GreenCardQuantity==4 and Right.GreenCardQuantity==12 return 16")
@@ -1683,7 +1722,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.GreenCardQuantity=4;
 			R.GreenCardQuantity=12;
-			Guild G (GuildType::gildia_filozofow);
+			Guild G;
+			G.GetType(GuildType::gildia_filozofow);
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1696,7 +1736,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.RedCardQuantity=0;
 			R.RedCardQuantity=0;
-			Guild G (GuildType::gildia_szpiegow);
+			Guild G;
+			G.GetType(GuildType::gildia_szpiegow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.RedCardQuantity==1 and Right.RedCardQuantity==0 return 1")
@@ -1706,7 +1747,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.RedCardQuantity=1;
 			R.RedCardQuantity=0;
-			Guild G (GuildType::gildia_szpiegow);
+			Guild G;
+			G.GetType(GuildType::gildia_szpiegow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.RedCardQuantity==1 and Right.RedCardQuantity==1 return 2")
@@ -1716,7 +1758,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.RedCardQuantity=1;
 			R.RedCardQuantity=1;
-			Guild G (GuildType::gildia_szpiegow);
+			Guild G;
+			G.GetType(GuildType::gildia_szpiegow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.RedCardQuantity==4 and Right.RedCardQuantity==12 return 16")
@@ -1726,7 +1769,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.RedCardQuantity=4;
 			R.RedCardQuantity=12;
-			Guild G (GuildType::gildia_szpiegow);
+			Guild G;
+			G.GetType(GuildType::gildia_szpiegow);
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1739,7 +1783,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BlueCardQuantity=0;
 			R.BlueCardQuantity=0;
-			Guild G (GuildType::gildia_sedziow);
+			Guild G;
+			G.GetType(GuildType::gildia_sedziow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BlueCardQuantity==1 and Right.BlueCardQuantity==0 return 1")
@@ -1749,7 +1794,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BlueCardQuantity=1;
 			R.BlueCardQuantity=0;
-			Guild G (GuildType::gildia_sedziow);
+			Guild G;
+			G.GetType(GuildType::gildia_sedziow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BlueCardQuantity==1 and Right.BlueCardQuantity==1 return 2")
@@ -1759,7 +1805,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BlueCardQuantity=1;
 			R.BlueCardQuantity=1;
-			Guild G (GuildType::gildia_sedziow);
+			Guild G;
+			G.GetType(GuildType::gildia_sedziow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if Left.BlueCardQuantity==4 and Right.BlueCardQuantity==12 return 16")
@@ -1769,7 +1816,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.BlueCardQuantity=4;
 			R.BlueCardQuantity=12;
-			Guild G (GuildType::gildia_sedziow);
+			Guild G;
+			G.GetType(GuildType::gildia_sedziow);
 			CHECK (16==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1783,7 +1831,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=0;
 			Plr.GreyCardQuantity=0;
 			Plr.BrownCardQuantity=0;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.GreyCardQuantity==1 and Plr.BrownCardQuantity==0 and Plr.GuildQuantity==0 return 1")
@@ -1794,7 +1843,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=0;
 			Plr.GreyCardQuantity=1;
 			Plr.BrownCardQuantity=0;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.GreyCardQuantity==0 and Plr.BrownCardQuantity==1 and Plr.GuildQuantity==0 return 1")
@@ -1805,7 +1855,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=0;
 			Plr.GreyCardQuantity=0;
 			Plr.BrownCardQuantity=1;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.GreyCardQuantity==0 and Plr.BrownCardQuantity==0 and Plr.GuildQuantity==1 return 1")
@@ -1816,7 +1867,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=1;
 			Plr.GreyCardQuantity=0;
 			Plr.BrownCardQuantity=0;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.GreyCardQuantity==1 and Plr.BrownCardQuantity==1 and Plr.GuildQuantity==1 return 3")
@@ -1827,7 +1879,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=1;
 			Plr.GreyCardQuantity=1;
 			Plr.BrownCardQuantity=1;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (3==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.GreyCardQuantity==3 and Plr.BrownCardQuantity==4 and Plr.GuildQuantity==1 return 8")
@@ -1838,7 +1891,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.GuildQuantity=1;
 			Plr.GreyCardQuantity=3;
 			Plr.BrownCardQuantity=4;
-			Guild G (GuildType::gildia_amatorow);
+			Guild G;
+			G.GetType(GuildType::gildia_amatorow);
 			CHECK (8==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1852,7 +1906,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=0;
 			L.WonderLevel=0;
 			R.WonderLevel=0;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.WonderLevel==0 and L.WonderLevel==1 and R.WonderLevel==0 return 1")
@@ -1863,7 +1918,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=0;
 			L.WonderLevel=1;
 			R.WonderLevel=0;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.WonderLevel==0 and L.WonderLevel==0 and R.WonderLevel==1 return 1")
@@ -1874,7 +1930,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=0;
 			L.WonderLevel=0;
 			R.WonderLevel=1;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==0 and R.WonderLevel==0 return 1")
@@ -1885,7 +1942,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=1;
 			L.WonderLevel=0;
 			R.WonderLevel=0;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==1 and R.WonderLevel==1 return 3")
@@ -1896,7 +1954,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=1;
 			L.WonderLevel=1;
 			R.WonderLevel=1;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (3==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if PLr.WonderLevel==1 and L.WonderLevel==2 and R.WonderLevel==3 return 6")
@@ -1907,7 +1966,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			Plr.WonderLevel=1;
 			L.WonderLevel=2;
 			R.WonderLevel=3;
-			Guild G (GuildType::gildia_budowniczych);
+			Guild G;
+			G.GetType(GuildType::gildia_budowniczych);
 			CHECK (6==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -1920,7 +1980,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.LosePoints=0;
 			R.LosePoints=0;
-			Guild G (GuildType::gildia_strategow);
+			Guild G;
+			G.GetType(GuildType::gildia_strategow);
 			CHECK (0==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if L.LosePoints==1 and R.LosePoints==0 return 1")
@@ -1930,7 +1991,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.LosePoints=1;
 			R.LosePoints=0;
-			Guild G (GuildType::gildia_strategow);
+			Guild G;
+			G.GetType(GuildType::gildia_strategow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if L.LosePoints==0 and R.LosePoints==1 return 1")
@@ -1940,7 +2002,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.LosePoints=0;
 			R.LosePoints=1;
-			Guild G (GuildType::gildia_strategow);
+			Guild G;
+			G.GetType(GuildType::gildia_strategow);
 			CHECK (1==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if L.LosePoints==1 and R.LosePoints==1 return 2")
@@ -1950,7 +2013,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.LosePoints=1;
 			R.LosePoints=1;
-			Guild G (GuildType::gildia_strategow);
+			Guild G;
+			G.GetType(GuildType::gildia_strategow);
 			CHECK (2==G.coutGuildPoints(Plr, L, R) );
 		}
 		SUBCASE ("if L.LosePoints==2 and R.LosePoints==3 return 5")
@@ -1960,7 +2024,8 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 			CardsAndWonder R;
 			L.LosePoints=2;
 			R.LosePoints=3;
-			Guild G (GuildType::gildia_strategow);
+			Guild G;
+			G.GetType(GuildType::gildia_strategow);
 			CHECK (5==G.coutGuildPoints(Plr, L, R) );
 		}
 	}
@@ -2006,8 +2071,8 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 		Player.UniversalSymbolQuantityUpdate();
 		CHECK(2==Player.returnUniversalSymbolQuantity());
 	}
-}*/
-
+}
+*/
 
 TEST_CASE ("testing Gracz::finishEra() with War Points from Wonder")
 {
@@ -2453,3 +2518,43 @@ TEST_CASE ("testing Gracz::finishEra() for changing Gracz::losePoints")
 	}
 }	
 
+TEST_CASE ("testing Gracz::BlackPointsUpdate()")
+{
+	SUBCASE ("if there is 0 WinPoints from Wonder, BlackPoints=0")
+	{
+		Gracz Player;
+		wonder W (wonderType::wielka_piramida_w_gizie_B);
+		Player.getWonder(&W);
+		Player.BlackPointsUpdate();
+		CHECK (0==Player.returnBlackPoints());
+	}
+	SUBCASE ("if there is 3 WinPoints from Wonder, BlackPoints=3")
+	{
+		Gracz Player;
+		wonder W (wonderType::wielka_piramida_w_gizie_B);
+		Player.getWonder(&W);
+		W.addWonderLevel();
+		Player.BlackPointsUpdate();
+		CHECK (3==Player.returnBlackPoints());
+	}
+	SUBCASE ("if there is 20 WinPoints from Wonder, BlackPoints=20")
+	{
+		Gracz Player;
+		wonder W (wonderType::wielka_piramida_w_gizie_B);
+		Player.getWonder(&W);
+		W.addWonderLevel();
+		W.addWonderLevel();
+		W.addWonderLevel();
+		W.addWonderLevel();
+		Player.BlackPointsUpdate();
+		CHECK (20==Player.returnBlackPoints());
+	}
+}
+
+TEST_CASE ("testing Gracz::GoldPointsUpdate()")
+{
+	SUBCASE ("if there is no goldenCards, GoldPoints=0")
+	{
+		Gracz Player;
+	}
+}

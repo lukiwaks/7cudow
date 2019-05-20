@@ -32,7 +32,8 @@ class Guild
 		GuildType type;
 	public:
 		int coutGuildPoints (CardsAndWonder Player, CardsAndWonder Left, CardsAndWonder Right);
-		Guild (GuildType t);
+		Guild ();
 		GuildType returnType ();
+		void GetType (GuildType t);
 };
 

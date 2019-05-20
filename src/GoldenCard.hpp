@@ -7,6 +7,7 @@ class GoldenCard
 		GoldenCardType type;
 	public:
 		int countWinPoints (int nuberOfBrownCards, int nuberOfGoldCards, int nuberOfGreyCards, wonder * W);
-		GoldenCard (GoldenCardType t);
+		GoldenCard ();
 		GoldenCardType returnType();
+		void GetType (GoldenCardType t);
 };

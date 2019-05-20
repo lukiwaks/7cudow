@@ -129,24 +129,22 @@ void Gracz::setNeighbours (Gracz * L, Gracz * R)
 
 void Gracz::addGoldenCard(GoldenCardType t)
 {
-	GoldenCard Card (t);
-	gold[GoldenCardQuantity]=&Card;
+	gold[GoldenCardQuantity].GetType(t);
 	GoldenCardQuantity++;
 }
 
 void Gracz::addGuild(GuildType t)
 {
-	Guild Card (t);
-	guild[GuildQuantity]=&Card;
+	guild[GuildQuantity].GetType(t);
 	GuildQuantity++;
 }
 
-GoldenCard * Gracz::returnGold (int i)
+GoldenCard Gracz::returnGold (int i)
 {
 
 	return gold[i];
 }
-#include <iostream>
+
 int Gracz::finishEra (int era)
 {
 	if (Left==NULL||Right==NULL)
@@ -191,12 +189,12 @@ void Gracz::UniversalSymbolQuantityUpdate ()
 	int sum=0;
 	for (int i=0; i<GuildQuantity; i++)
 	{
-		if (GuildType::gildia_naukowcow==(guild[i]->returnType()))
+		if (int(GuildType::gildia_naukowcow)==int(guild[i].returnType()))
 		{
 			sum++;
 		}
 	}
-	sum=sum+Wonder->returnWonderUniversalSymbol();
+	sum=sum+(Wonder->returnWonderUniversalSymbol());
 	UniversalSymbolQuantity=sum;
 }
 
@@ -227,6 +225,26 @@ int Gracz::returnGreenPoints()
 {
 	return GreenPoints;
 }
+
+Guild Gracz::returnGuild(int i)
+{
+	return guild [i];
+}
+
+void Gracz::GoldPointsUpdate()
+{
+	int sum=0;
+	for (int i=0; i<GoldenCardQuantity; i++)
+	{
+		sum=(gold[i].countWinPoints(BrownCardQuantity, GoldenCardQuantity, GreyCardQuantity, Wonder)) + sum;
+	}
+	GoldPoints=sum;
+}
+
+int Gracz::returnBlackPoints()
+{
+	return BlackPoints;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()
@@ -252,4 +270,5 @@ Gracz::Gracz ()
  	GoldPoints=0; 
  	VioletPoints=0; 
  	MoneyPoints=0;
+ 	GuildQuantity=0;
 }
