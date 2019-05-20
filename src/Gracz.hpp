@@ -53,7 +53,10 @@ class Gracz
 		int returnLosePoints();
 		int returnGreenPoints();
 		int getPointsResult(); // do zaimplementowani
+		void addWonderLevel(); //do zaimplementowania
 		int returnBlackPoints();
+		int returnGoldPoints();
+		int returnVioletPoints();
 
  		void addBlueCard(int pointsCount);
  		void addBrownCard();
@@ -74,9 +77,10 @@ class Gracz
  		void WinPointsSumUpdate();
  		Guild returnGuild(int i);
  		void GoldPointsUpdate();
+ 		void VioletPointsUpdate();
+ 		int returnWonderLevel();
+ 		int returnGuildQuantity();
  		Gracz ();
-
-
  		
 };
 

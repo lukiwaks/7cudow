@@ -245,6 +245,72 @@ int Gracz::returnBlackPoints()
 {
 	return BlackPoints;
 }
+
+int Gracz::returnGoldPoints()
+{
+	return GoldPoints;
+}
+
+void Gracz::VioletPointsUpdate()
+{
+	int sum=0;
+	CardsAndWonder Player = 
+	{
+		BlueCardQuantity,
+ 		BrownCardQuantity,
+ 		GreyCardQuantity,
+ 		RedCardQuantity,
+ 		GreenCardQuantity,
+ 		GoldenCardQuantity,
+ 		GuildQuantity,
+ 		Wonder->returnWonderLevel(),
+ 		LosePoints,
+	};
+	CardsAndWonder L = 
+	{
+		Left->returnBlueCardQuantity(),
+ 		Left->returnBrownCardQuantity(),
+ 		Left->returnGreyCardQuantity(),
+ 		Left->returnRedCardQuantity(),
+ 		Left->returnGreenCardQuantity(),
+ 		Left->returnGoldenCardQuantity(),
+ 		Left->returnGuildQuantity(),
+ 		Left->returnWonderLevel(),
+ 		Left->returnLosePoints(),
+	};
+	CardsAndWonder R = 
+	{
+		Right->returnBlueCardQuantity(),
+ 		Right->returnBrownCardQuantity(),
+ 		Right->returnGreyCardQuantity(),
+ 		Right->returnRedCardQuantity(),
+ 		Right->returnGreenCardQuantity(),
+ 		Right->returnGoldenCardQuantity(),
+ 		Right->returnGuildQuantity(),
+ 		Right->returnWonderLevel(),
+ 		Right->returnLosePoints(),
+	};
+	for(int i=0;i<GuildQuantity;i++)
+	{
+		sum=+guild[i].coutGuildPoints (Player, L, R);
+	}
+	VioletPoints=sum;
+}
+
+int Gracz::returnVioletPoints()
+{
+	return VioletPoints;
+}
+
+int Gracz::returnWonderLevel()
+{
+	return Wonder->returnWonderLevel();
+}
+int Gracz::returnGuildQuantity ()
+{
+	return GuildQuantity;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gracz::Gracz ()

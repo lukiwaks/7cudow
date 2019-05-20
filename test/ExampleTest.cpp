@@ -2030,7 +2030,7 @@ TEST_CASE ("testing of Guild::coutGuildPoints")
 		}
 	}
 }
-/*
+
 TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 {
 	SUBCASE ("when Woder.WonderUniversalSymbol==0, and there is no gildia_naukowcow then PlayerUniversalSymbolQuantity=0")
@@ -2065,6 +2065,8 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 		Gracz Player;
 		wonder W (wonderType::wiszace_ogrody_semiramidy_A);
 		Player.getWonder (&W);
+		W.addWonderLevel();
+		W.addWonderLevel();
 		Player.addGuild(GuildType::gildia_budowniczych);
 		Player.addGuild(GuildType::gildia_filozofow);
 		Player.addGuild(GuildType::gildia_naukowcow);
@@ -2072,7 +2074,7 @@ TEST_CASE ("testing Gracz::UniversalSymbolQuantityUpdate")
 		CHECK(2==Player.returnUniversalSymbolQuantity());
 	}
 }
-*/
+
 
 TEST_CASE ("testing Gracz::finishEra() with War Points from Wonder")
 {
@@ -2556,5 +2558,113 @@ TEST_CASE ("testing Gracz::GoldPointsUpdate()")
 	SUBCASE ("if there is no goldenCards, GoldPoints=0")
 	{
 		Gracz Player;
+		Player.GoldPointsUpdate();
+		CHECK(0==Player.returnGoldPoints());
+	}
+	SUBCASE ("if there is one goldenCard type Port and 0==Browncards, GoldPoints=0")
+	{
+		Gracz Player;
+		Player.addGoldenCard(GoldenCardType::port);
+		Player.GoldPointsUpdate();
+		CHECK(0==Player.returnGoldPoints());
+	}
+	SUBCASE ("if there is one goldenCard type Port and 6==Browncards, GoldPoints==6")
+	{
+		Gracz Player;
+		Player.addGoldenCard(GoldenCardType::port);
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.GoldPointsUpdate();
+		CHECK(6==Player.returnGoldPoints());
+	}
+	SUBCASE ("if there is one goldenCard type dom_handlowy and 3==GreyCards, GoldPoints==6")
+	{
+		Gracz Player;
+		Player.addGoldenCard(GoldenCardType::dom_handlowy);
+		Player.addGreyCard();
+		Player.addGreyCard();
+		Player.addGreyCard();
+		Player.GoldPointsUpdate();
+		CHECK(6==Player.returnGoldPoints());
+	}
+	SUBCASE ("if there is goldenCard type dom_handlowy, goldenCard type Port and 2==GreyCards, 4==Browncards then GoldPoints==8")
+	{
+		Gracz Player;
+		Player.addGreyCard();
+		Player.addGoldenCard(GoldenCardType::dom_handlowy);
+		Player.addGreyCard();
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.addGoldenCard(GoldenCardType::port);
+		Player.addBrownCard();
+		Player.addBrownCard();
+		Player.GoldPointsUpdate();
+		CHECK(8==Player.returnGoldPoints());
+	}
+}
+
+TEST_CASE ("testing Gracz::violetPointsUpdate()")
+{
+	SUBCASE ("if there is no guilds VioletPoints=0")
+	{
+		Gracz Player;
+		Gracz L;
+		Gracz R;
+		wonder W(wonderType::wielka_piramida_w_gizie_B);
+		wonder WL(wonderType::wiszace_ogrody_semiramidy_B);
+		wonder WR(wonderType::swiatynia_artemidy_w_efezie_B);
+		Player.getWonder(&W);
+		L.getWonder(&WL);
+		R.getWonder(&WR);
+		Player.setNeighbours(&L, &R);
+		Player.VioletPointsUpdate();
+		CHECK (0==Player.returnVioletPoints());
+	}
+	SUBCASE ("if there is one guild type gildia_robotnikow and Left player has 2 brown cards, and right has 1 brown card VioletPoints=3")
+	{
+		Gracz Player;
+		Gracz L;
+		Gracz R;
+		wonder W(wonderType::wielka_piramida_w_gizie_B);
+		wonder WL(wonderType::wiszace_ogrody_semiramidy_B);
+		wonder WR(wonderType::swiatynia_artemidy_w_efezie_B);
+		Player.getWonder(&W);
+		L.getWonder(&WL);
+		R.getWonder(&WR);
+		Player.setNeighbours(&L, &R);
+		Player.addGuild(GuildType::gildia_robotnikow);
+		L.addBrownCard();
+		L.addBrownCard();
+		R.addBrownCard();
+		Player.VioletPointsUpdate();
+		CHECK (3==Player.returnVioletPoints());
+	}
+	SUBCASE ("if there is one guild type gildia_robotnikow and Left player has 2 brown cards, and right has 1 brown card and also there is one guild type gildia_strategow and Left player has 3 losePoints, and right has 1 losePoints then VioletPoints=7")
+	{
+		Gracz Player;
+		Gracz L;
+		Gracz R;
+		wonder W(wonderType::wielka_piramida_w_gizie_B);
+		wonder WL(wonderType::wiszace_ogrody_semiramidy_B);
+		wonder WR(wonderType::swiatynia_artemidy_w_efezie_B);
+		Player.getWonder(&W);
+		L.getWonder(&WL);
+		R.getWonder(&WR);
+		Player.setNeighbours(&L, &R);
+		Player.addGuild(GuildType::gildia_robotnikow);
+		L.addBrownCard();
+		L.addBrownCard();
+		R.addBrownCard();
+		Player.addRedCard(2);
+		Player.finishEra(1);
+		R.addRedCard(2);
+		Player.finishEra(2);
+		Player.addGuild(GuildType::gildia_strategow);
+		Player.VioletPointsUpdate();
+		CHECK (7==Player.returnVioletPoints());
 	}
 }
