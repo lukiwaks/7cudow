@@ -53,7 +53,7 @@ class Gracz
 		int returnLosePoints();
 		int returnGreenPoints();
 		int getPointsResult(); // do zaimplementowani
-		void addWonderLevel(); //do zaimplementowania
+		void addWonderLevel(); //bez testow
 		int returnBlackPoints();
 		int returnGoldPoints();
 		int returnVioletPoints();

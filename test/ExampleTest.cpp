@@ -2643,7 +2643,9 @@ TEST_CASE ("testing Gracz::violetPointsUpdate()")
 		Player.VioletPointsUpdate();
 		CHECK (3==Player.returnVioletPoints());
 	}
-	SUBCASE ("if there is one guild type gildia_robotnikow and Left player has 2 brown cards, and right has 1 brown card and also there is one guild type gildia_strategow and Left player has 3 losePoints, and right has 1 losePoints then VioletPoints=7")
+
+	#include <iostream>
+	SUBCASE ("if there is one guild type gildia_robotnikow and Left player has 2 brown cards, and right has 1 brown card and also there is one guild type gildia_rzemieslnikow and Left player has 3 GreyCards, and right has 1 GreyCards then VioletPoints=11")
 	{
 		Gracz Player;
 		Gracz L;
@@ -2659,12 +2661,13 @@ TEST_CASE ("testing Gracz::violetPointsUpdate()")
 		L.addBrownCard();
 		L.addBrownCard();
 		R.addBrownCard();
-		Player.addRedCard(2);
-		Player.finishEra(1);
-		R.addRedCard(2);
-		Player.finishEra(2);
-		Player.addGuild(GuildType::gildia_strategow);
+		L.addGreyCard();
+		L.addGreyCard();
+		L.addGreyCard();
+		R.addGreyCard();
+		Player.addGuild(GuildType::gildia_rzemieslnikow);
+		std::cout<< R.returnLosePoints();
 		Player.VioletPointsUpdate();
-		CHECK (7==Player.returnVioletPoints());
+		CHECK (11==Player.returnVioletPoints());
 	}
 }

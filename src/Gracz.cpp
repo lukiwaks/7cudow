@@ -292,7 +292,7 @@ void Gracz::VioletPointsUpdate()
 	};
 	for(int i=0;i<GuildQuantity;i++)
 	{
-		sum=+guild[i].coutGuildPoints (Player, L, R);
+		sum=guild[i].coutGuildPoints (Player, L, R)+sum;
 	}
 	VioletPoints=sum;
 }
@@ -309,6 +309,19 @@ int Gracz::returnWonderLevel()
 int Gracz::returnGuildQuantity ()
 {
 	return GuildQuantity;
+}
+void Gracz::addWonderLevel()
+{
+	Wonder->addWonderLevel();
+}
+int Gracz::getPointsResult()
+{
+	GreenCardPointsUpdate();
+ 	BlackPointsUpdate();
+ 	GoldPointsUpdate();
+ 	VioletPointsUpdate();
+	WinPointsSum=GreenPoints+RedCardWinPoints+BlueCardPoints+BlackPoints+GoldPoints+VioletPoints+MoneyPoints;
+	return WinPointsSum;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
